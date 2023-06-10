@@ -1,0 +1,350 @@
+﻿<Window x:Class="TuristickaAgencija.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TuristickaAgencija"
+        mc:Ignorable="d"
+        Title="Turističke agencije" Height="600" Width="1250" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <CollectionViewSource x:Key="agencijeViewSource"/>
+        <CollectionViewSource x:Key="vodiciViewSource"/>
+        <CollectionViewSource x:Key="putovanjaViewSource"/>
+        <CollectionViewSource x:Key="nudiViewSource"/>
+        <CollectionViewSource x:Key="klijentiViewSource"/>
+        <CollectionViewSource x:Key="destinacijeViewSource"/>
+        <CollectionViewSource x:Key="obuhvataViewSource"/>
+        <CollectionViewSource x:Key="tipovismestajaViewSource"/>
+        <CollectionViewSource x:Key="smestajiViewSource"/>
+        <CollectionViewSource x:Key="prevoznasredstvaViewSource"/>
+        <CollectionViewSource x:Key="rezervacijeViewSource"/>
+        <CollectionViewSource x:Key="sedolaziViewSource"/>
+        <CollectionViewSource x:Key="autobusiViewSource"/>
+        <CollectionViewSource x:Key="vrsteautomobilaViewSource"/>
+        <CollectionViewSource x:Key="automobiliViewSource"/>
+        <CollectionViewSource x:Key="nabavljaViewSource"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl >
+            <TabItem Header="Agencije">
+                <DataGrid x:Name="AgencijeDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource agencijeViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdAg}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding NazAg}" 
+                                            Header="Naziv agencije"/>
+                        <DataGridTextColumn Binding="{Binding AdrAg}"
+                                            Header="Adresa agencije"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Vodiči">
+                <DataGrid x:Name="VodiciDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource vodiciViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdVod}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding JmbgVod}" 
+                                            Header="JMBG"/>
+                        <DataGridTextColumn Binding="{Binding ImeVod}"
+                                            Header="Ime"/>
+                        <DataGridTextColumn Binding="{Binding PrzVod}"
+                                            Header="Prezime"/>
+                        <DataGridTextColumn Binding="{Binding BrVod}"
+                                            Header="Broj telefona"/>
+                        <DataGridComboBoxColumn Header="Naziv Agencije"
+                                                ItemsSource="{Binding Source={StaticResource agencijeViewSource}}"
+                                                DisplayMemberPath="NazAg"
+                                                SelectedValueBinding="{Binding IdAg}"
+                                                SelectedValuePath="IdAg"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Putovanja">
+                <DataGrid x:Name="PutovanjaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource putovanjaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdPuta}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding NazPuta}" 
+                                            Header="Naviv putovanja"/>
+                        <DataGridTextColumn Binding="{Binding CenaPuta}"
+                                            Header="Cena (RSD)"/>
+                        <DataGridTextColumn Binding="{Binding DatumPol}"
+                                            Header="Datum polaska"/>
+                        <DataGridTextColumn Binding="{Binding DatumPov}"
+                                            Header="Datum povratka"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Ponude">
+                <DataGrid x:Name="NudiDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource nudiViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdNudi}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Naziv agencije"
+                                                ItemsSource="{Binding Source={StaticResource agencijeViewSource}}"
+                                                DisplayMemberPath="NazAg"
+                                                SelectedValueBinding="{Binding IdAg}"
+                                                SelectedValuePath="IdAg"/>
+                        <DataGridComboBoxColumn Header="Naziv putovanja"
+                                                ItemsSource="{Binding Source={StaticResource putovanjaViewSource}}"
+                                                DisplayMemberPath="NazPuta"
+                                                SelectedValueBinding="{Binding IdPuta}"
+                                                SelectedValuePath="IdPuta"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Klijenti">
+                <DataGrid x:Name="KlijentDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource klijentiViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdK}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding JmbgK}"
+                                            Header="JMBG "/>
+                        <DataGridTextColumn Binding="{Binding ImeK}"
+                                            Header="Ime"/>
+                        <DataGridTextColumn Binding="{Binding PrzK}"
+                                            Header="Prezime"/>
+                        <DataGridTextColumn Binding="{Binding BrK}"
+                                            Header="Broj telefona"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Destinacije">
+                <DataGrid x:Name="DestinacijeDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource destinacijeViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdDest}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding NazDest}"
+                                            Header="Naziv"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Obuhvaćene destinacije">
+                <DataGrid x:Name="ObuhvataDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource obuhvataViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdObuhvata}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Naziv putovanja"
+                                                ItemsSource="{Binding Source={StaticResource putovanjaViewSource}}"
+                                                DisplayMemberPath="NazPuta"
+                                                SelectedValueBinding="{Binding IdPuta}"
+                                                SelectedValuePath="IdPuta"/>
+                        <DataGridComboBoxColumn Header="Naziv destinacije"
+                                                ItemsSource="{Binding Source={StaticResource destinacijeViewSource}}"
+                                                DisplayMemberPath="NazDest"
+                                                SelectedValueBinding="{Binding IdDest}"
+                                                SelectedValuePath="IdDest"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Tipovi smeštaja">
+                <DataGrid x:Name="TipsmestajaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource tipovismestajaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdTipa}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding NazTipa}"
+                                            Header="Naziv tipa"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Smeštaji">
+                <DataGrid x:Name="SmestajDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource smestajiViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdSm}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Naziv destinacije"
+                                                ItemsSource="{Binding Source={StaticResource destinacijeViewSource}}"
+                                                DisplayMemberPath="NazDest"
+                                                SelectedValueBinding="{Binding IdDest}"
+                                                SelectedValuePath="IdDest"/>
+                        <DataGridTextColumn Binding="{Binding NazSm}"
+                                            Header="Naziv smeštaja"/>
+                        <DataGridComboBoxColumn Header="Tip smeštaja"
+                                                ItemsSource="{Binding Source={StaticResource tipovismestajaViewSource}}"
+                                                DisplayMemberPath="NazTipa"
+                                                SelectedValueBinding="{Binding IdTipa}"
+                                                SelectedValuePath="IdTipa"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Prevozna sredstva">
+                <DataGrid x:Name="PrevoznoSredstvoDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource prevoznasredstvaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdPrzs}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding KategorijaPrzs}"
+                                            Header="Kategorija"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Rezervacije">
+                <DataGrid x:Name="RezerviseDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource rezervacijeViewSource}}" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridComboBoxColumn Header="Ime klijenta"
+                                                ItemsSource="{Binding Source={StaticResource klijentiViewSource}}"
+                                                DisplayMemberPath="ImeK"
+                                                SelectedValueBinding="{Binding IdK}"
+                                                SelectedValuePath="IdK"/>
+                            <DataGridComboBoxColumn Header="Prezime klijenta"
+                                                ItemsSource="{Binding Source={StaticResource klijentiViewSource}}"
+                                                DisplayMemberPath="PrzK"
+                                                SelectedValueBinding="{Binding IdK}"
+                                                SelectedValuePath="IdK"/>
+                            <DataGridComboBoxColumn Header="Broj telefona"
+                                                ItemsSource="{Binding Source={StaticResource klijentiViewSource}}"
+                                                DisplayMemberPath="BrK"
+                                                SelectedValueBinding="{Binding IdK}"
+                                                SelectedValuePath="IdK"/>
+                            <DataGridComboBoxColumn Header="Naziv putovanja"
+                                                ItemsSource="{Binding Source={StaticResource putovanjaViewSource}}"
+                                                DisplayMemberPath="NazPuta"
+                                                SelectedValueBinding="{Binding IdPuta}"
+                                                SelectedValuePath="IdPuta"/>
+                            <DataGridComboBoxColumn Header="Prevozno sredstvo"
+                                                ItemsSource="{Binding Source={StaticResource prevoznasredstvaViewSource}}"
+                                                DisplayMemberPath="KategorijaPrzs"
+                                                SelectedValueBinding="{Binding IdPrzs}"
+                                                SelectedValuePath="IdPrzs"/>
+                            <DataGridComboBoxColumn Header="Naziv agencije"
+                                                ItemsSource="{Binding Source={StaticResource agencijeViewSource}}"
+                                                DisplayMemberPath="NazAg"
+                                                SelectedValueBinding="{Binding IdAg}"
+                                                SelectedValuePath="IdAg"/>
+
+
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+            </TabItem>
+            <TabItem Header="Dolasci">
+                <DataGrid x:Name="SeDolaziDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource sedolaziViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdSeDolazi}" 
+                                            Header="Id"
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Naziv destinacije"
+                                                ItemsSource="{Binding Source={StaticResource destinacijeViewSource}}"
+                                                DisplayMemberPath="NazDest"
+                                                SelectedValueBinding="{Binding IdDest}"
+                                                SelectedValuePath="IdDest"/>
+                        <DataGridComboBoxColumn Header="Prevozno sredstvo"
+                                                ItemsSource="{Binding Source={StaticResource prevoznasredstvaViewSource}}"
+                                                DisplayMemberPath="KategorijaPrzs"
+                                                SelectedValueBinding="{Binding IdPrzs}"
+                                                SelectedValuePath="IdPrzs"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Autobusi">
+                <DataGrid x:Name="AutobusDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource autobusiViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdPrzs}" 
+                                            Header="Id prevoznog sredstva"/>
+                        <DataGridTextColumn Binding="{Binding RegBrBus}"
+                                            Header="Registarski broj"/>
+                        <DataGridTextColumn Binding="{Binding BrMesta}"
+                                            Header="Broj mesta u vozilu"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Vrste automobila">
+                <DataGrid x:Name="VrsteAutomobilaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource vrsteautomobilaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdVrste}" 
+                                            Header="Id "
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding NazVrste}"
+                                            Header="Naziv vrste"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Automobili">
+                <DataGrid x:Name="AutomobiliDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource automobiliViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdPrzs}"
+                                            Header="Id pevoznog sredstva"/>
+                        <DataGridTextColumn Binding="{Binding RegBrAuto}" 
+                                            Header="Registarski broj "/>
+                        <DataGridComboBoxColumn Header="Marka automobila"
+                                                ItemsSource="{Binding Source={StaticResource vrsteautomobilaViewSource}}"
+                                                DisplayMemberPath="NazVrste"
+                                                SelectedValueBinding="{Binding IdVrste}"
+                                                SelectedValuePath="IdVrste"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Nabavke autobusa">
+                <DataGrid x:Name="NabavkaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource nabavljaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding IdNabavlja}" 
+                                            Header="Id "
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Agencija koja nabavlja"
+                                                ItemsSource="{Binding Source={StaticResource agencijeViewSource}}"
+                                                DisplayMemberPath="NazAg"
+                                                SelectedValueBinding="{Binding IdAg}"
+                                                SelectedValuePath="IdAg"/>
+                        <DataGridTextColumn Binding="{Binding IdPrzs}"
+                                            Header="Id prevoznog sredstva"/>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+
+            </TabItem>
+        </TabControl>
+
+        <Button Content="Snimanje" 
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                Height="20" Width="80" Margin="10,10,10,10" Click="Button_Click"/>
+    </Grid>
+</Window>
